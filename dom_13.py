@@ -9,6 +9,12 @@ class Category:
     total_unique_products = 0
 
     def __init__(self, name, description, products):
+        """
+        Метод инициализации класса
+        :param name: название категории
+        :param description: описание категории
+        :param products: товары, которые входят в эту категорию
+        """
         self.name = name
         self.description = description
         self.products = products
@@ -21,20 +27,27 @@ class Product:
     Класс для представления товаров.
     """
     def __init__(self, name, description, price: float, count: int):
+        """
+        Метод инициализации класса
+        :param name: название товара
+        :param description: описание товара
+        :param price: цена на товар
+        :param count: кол-во товара
+        """
         self.name = name
         self.description = description
         self.price = price
         self.count = count
 
 
-def load_data_from_json():
+def load_data_from_json(data_json):
     """
     Загружает файл json, вытаскивает из него название, описание категорий, а так же товары, их название, описание,
     цену и количество
     :return: список categories со всеми категориями и товарами в этой категории
     """
 
-    with open('products.json', 'r', encoding='UTF-8') as file:
+    with open(data_json, 'r', encoding='UTF-8') as file:
         json_format = json.load(file)
     categories = []
     for category_data in json_format:
@@ -55,7 +68,7 @@ def load_data_from_json():
 
 
 if __name__ == '__main__':
-    categories = load_data_from_json()
+    categories = load_data_from_json('products.json')
     for category in categories:
         print(f'Категория: {category.name}, Описание: {category.description}')
         for product in category.products:

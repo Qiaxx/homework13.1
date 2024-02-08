@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dom-13-1"
+version = "0.1.0"
+description = ""
+authors = ["Qiaxx <belozertsev04@mail.ru>"]
+readme = "README.md"
+packages = [{include = "dom_13"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

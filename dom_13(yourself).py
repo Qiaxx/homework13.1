@@ -8,7 +8,7 @@ class Category:
     total_categories = 0
     total_unique_products = 0
 
-    def __init__(self, name, description):
+    def __init__(self, name, description, products):
         """
         Метод инициализации класса
         :param name: название категории
@@ -25,7 +25,7 @@ class Category:
         Category.total_unique_products += 1
 
     @property
-    def get_products(self):
+    def products(self):
         info_list = []
         for product in self.__products:
             info_list.append(f'{product.name}, {product._price} руб. Остаток: {product.count}')
@@ -51,6 +51,8 @@ class Product:
     Класс для представления товаров.
     """
 
+    products_list = []  # Список существующих товаров
+
     def __init__(self, name, description, price: float, count: int):
         """
         Метод инициализации класса
@@ -63,14 +65,21 @@ class Product:
         self.description = description
         self._price = price
         self.count = count
+        Product.products_list.append(self)
 
-    @staticmethod
-    def create_product():  # , name, description, price, count):
-        product_name = input('Введите название товара: ')
-        product_description = input('Введите описание товара: ')
-        product_price = int(input('Введите цену на товар за единицу: '))
-        product_count = int(input('Введите количество товара в наличии: '))
-        return Product(product_name, product_description, product_price, product_count)
+    @classmethod
+    def create_product(cls, product_dictionary):
+        name = product_dictionary['name']
+        description = product_dictionary['description']
+        price = product_dictionary['price']
+        count = product_dictionary['count']
+
+        for product in cls.products_list:
+            if name == product.name:
+                product.count += count
+                return product
+
+        return cls(name, description, price, count)
 
     @property
     def price(self):
@@ -81,12 +90,28 @@ class Product:
         if value <= 0:
             print('Цена введена неккоректно')
         else:
-            if value < self._price:
+            if value < self._price or value > self._price:
                 answer = input('Вы уверены, что хотите изменить цену? (y/n) ')
                 if answer == 'n':
                     print('Действие отменено')
                 else:
                     self._price = value
+
+
+def create_product_dictionary():
+    """
+    Функция создания нового товара
+    :return: словарь с названием, описанием, ценой и кол-вом товара
+    """
+
+    new_product_data = {
+        'name': input('Введите название товара: '),
+        'description': input('Введите описание товара: '),
+        'price': float(input('Введите цену на товар за единицу: ')),
+        'count': int(input('Введите количество товара в наличии: '))
+    }
+
+    return new_product_data
 
 
 # def load_data_from_json(data_json):
@@ -126,25 +151,34 @@ class Product:
 #         print()
 
 # код для проверки
-category1 = Category("Category1", "Category Description")
+category1 = Category("Category1", "Category Description", [])
 product1 = Product("Product1", "Description1", 10.0, 5)
 product2 = Product("Product2", "Description2", 15.0, 8)
 
 category1.add_product(product1)
 category1.add_product(product2)
 
-print('\n'.join(category1.get_products))
+print('\n'.join(category1.products))
 
-category2 = Category("Category2", "Category Description")
-product3 = Product.create_product()
-product4 = Product.create_product()
+new_product = create_product_dictionary()
+product3 = Product.create_product(new_product)
 
-category2.add_product(product3)
-category2.add_product(product4)
+category1.add_product(product3)
 
-print('\n'.join(category2.get_products))
+print('\n'.join(category1.products))
 
-product3.price = int(input())
-
-print('\n'.join(category2.get_products))
-
+# category2 = Category("Category2", "Category Description", [])
+# new_product = create_product_dictionary()
+# new_product2= create_product_dictionary()
+#
+# product3 = Product.create_product(new_product)
+# product4 = Product.create_product(new_product2)
+#
+# category2.add_product(product3)
+# category2.add_product(product4)
+#
+# print('\n'.join(category2.products))
+#
+# product3.price = int(input('Введите новую цену: '))
+#
+# print('\n'.join(category2.products))

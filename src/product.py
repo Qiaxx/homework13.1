@@ -48,3 +48,11 @@ class Product:
                     print('Действие отменено')
                 else:
                     self._price = value
+
+    def __str__(self):
+        return f"{self.name}, {self._price} руб. Остаток: {self.count} шт."
+
+    def __add__(self, other):
+        sum_product1 = self.count * self._price
+        sum_product2 = other._price * other.count
+        return sum_product1 + sum_product2

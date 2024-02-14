@@ -14,7 +14,7 @@ class Category:
         """
         self.name = name
         self.description = description
-        self.__products = []
+        self.__products = list(dict(products))
         Category.total_categories += 1
 
     def add_product(self, product):
@@ -27,3 +27,9 @@ class Category:
         for product in self.__products:
             info_list.append(f'{product.name}, {product._price} руб. Остаток: {product.count}')
         return info_list
+
+    def __str__(self):
+        count_all_products = 0
+        for product in self.__products:
+            count_all_products += product['count']
+        return f'{self.name}, количество продуктов: {count_all_products} шт.'

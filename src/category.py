@@ -29,7 +29,10 @@ class Category:
         return info_list
 
     def __str__(self):
+        return f'{self.name}, количество продуктов: {len(self)} шт.'
+
+    def __len__(self):
         count_all_products = 0
         for product in self.__products:
             count_all_products += product['count']
-        return f'{self.name}, количество продуктов: {count_all_products} шт.'
+        return count_all_products

@@ -12,3 +12,10 @@ def test_category_total_count():
     assert category2.description == 'Category Description'
     assert category1.products == []
     assert category2.products == []
+    category1.add_product({
+            'name': 'Ya govno',
+            'description': 'dadada',
+            'price': 17.8,
+            'count': 10
+        })
+    assert str(category1) == 'Category1, количество продуктов: 10 шт.'

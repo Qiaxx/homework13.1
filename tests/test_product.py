@@ -12,3 +12,5 @@ def test_category_total_unique_products():
     assert product2.price == 15.0
     assert product1.count == 5
     assert product2.count == 8
+    assert str(product1) == 'Product1, 10.0 руб. Остаток: 5 шт.'
+    assert product1 + product2 == 170

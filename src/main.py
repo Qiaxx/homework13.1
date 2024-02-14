@@ -19,6 +19,11 @@ def main():
         return new_product_data
 
     def return_dict(product_object):
+        """
+        Функция преобразовывает экземпляр класса в словарь, где ключи - это поля класса, а значения - значения ключей
+        :param product_object: экземпляр класса
+        :return: словарь, где ключи - это поля класса, а значения - значения ключей
+        """
         product_dict = vars(product_object)
         return product_dict
 

@@ -33,7 +33,7 @@ class Category:
         """
         info_list = []
         for product in self.__products:
-            info_list.append(f'{product['name']}, {product['_price']} руб. Остаток: {product['count']}')
+            info_list.append(f'{product.name}, {product._price} руб. Остаток: {product.count}')
         return info_list
 
     def __str__(self):
@@ -50,5 +50,5 @@ class Category:
         """
         count_all_products = 0
         for product in self.__products:
-            count_all_products += product['count']
+            count_all_products += product.count
         return count_all_products

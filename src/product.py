@@ -48,7 +48,9 @@ class Product:
         if value <= 0:
             print('Цена введена неккоректно')
         else:
-            if value < self._price or value > self._price:
+            if self._price > value:
+                self._price = value
+            elif value < self._price:
                 answer = input('Вы уверены, что хотите изменить цену? (y/n) ')
                 if answer == 'n':
                     print('Действие отменено')

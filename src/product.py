@@ -21,6 +21,12 @@ class Product:
 
     @classmethod
     def create_product(cls, product_dictionary):
+        """
+        Метод форматирования словаря в экземпляр класса Product
+        :param product_dictionary: словарь с данными о товаре, где 'name' - название, 'description' - описание,
+        'price' - цена, 'count' - количество штук
+        :return: экземпляр товара
+        """
         name = product_dictionary['name']
         description = product_dictionary['description']
         price = product_dictionary['price']
@@ -42,7 +48,9 @@ class Product:
         if value <= 0:
             print('Цена введена неккоректно')
         else:
-            if value < self._price or value > self._price:
+            if self._price > value:
+                self._price = value
+            elif value < self._price:
                 answer = input('Вы уверены, что хотите изменить цену? (y/n) ')
                 if answer == 'n':
                     print('Действие отменено')
@@ -50,9 +58,17 @@ class Product:
                     self._price = value
 
     def __str__(self):
+        """
+        Метод вывода информации о товаре
+        :return: вывод информации о товаре
+        """
         return f"{self.name}, {self._price} руб. Остаток: {self.count} шт."
 
     def __add__(self, other):
+        """
+        Метод сложения общей стоимости товаров с учетом их количества
+        :return: общая сумма всех товаров
+        """
         sum_product1 = self.count * self._price
         sum_product2 = other._price * other.count
         return sum_product1 + sum_product2

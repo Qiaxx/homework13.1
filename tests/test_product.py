@@ -1,5 +1,11 @@
 from src.product import Product
 
+test_dict_product = {
+    'name': 'text',
+    'description': 'dadada',
+    'price': 17.8,
+    'count': 10
+}
 
 def test_category_total_unique_products():
     product1 = Product("Product1", "Description1", 10.0, 5)

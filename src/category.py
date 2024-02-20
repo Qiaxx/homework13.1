@@ -14,15 +14,15 @@ class Category:
         """
         self.name = name
         self.description = description
-        self.__products = list(products)
+        self.__products = set(products)
         Category.total_categories += 1
 
     def add_product(self, product):
         """
         Метод добавления новых товаров
-        :param product: товар (словарь)
+        :param product: товар
         """
-        self.__products.append(product)
+        self.__products.add(product)
         Category.total_unique_products += 1
 
     @property

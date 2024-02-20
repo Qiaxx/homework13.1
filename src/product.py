@@ -64,7 +64,7 @@ class Product:
         """
         return f"{self.name}, {self._price} руб. Остаток: {self.count} шт."
 
-    def __add__(self, other):
+    def __add__(self, other, other2):
         """
         Метод сложения общей стоимости товаров с учетом их количества
         :return: общая сумма всех товаров

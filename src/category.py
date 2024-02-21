@@ -1,3 +1,5 @@
+from src.product import Product
+
 class Category:
     """
     Класс для представления категорий товаров.
@@ -22,8 +24,9 @@ class Category:
         Метод добавления новых товаров
         :param product: товар
         """
-        self.__products.add(product)
-        Category.total_unique_products += 1
+        if isinstance(product, Product):
+            self.__products.add(product)
+            Category.total_unique_products += 1
 
     @property
     def products(self):

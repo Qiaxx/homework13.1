@@ -13,7 +13,8 @@ def main():
             'name': input('Введите название товара: '),
             'description': input('Введите описание товара: '),
             'price': float(input('Введите цену на товар за единицу: ')),
-            'count': int(input('Введите количество товара в наличии: '))
+            'count': int(input('Введите количество товара в наличии: ')),
+            'color': input('Введите цвет товара')
         }
 
         return new_product_data

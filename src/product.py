@@ -5,7 +5,7 @@ class Product:
 
     products_list = []  # Список существующих товаров
 
-    def __init__(self, name, description, price: float, count: int):
+    def __init__(self, name, description, price: float, count: int, color):
         """
         Метод инициализации класса
         :param name: название товара
@@ -15,6 +15,7 @@ class Product:
         """
         self.name = name
         self.description = description
+        self.color = color
         self._price = price
         self.count = count
         Product.products_list.append(self)
@@ -31,13 +32,14 @@ class Product:
         description = product_dictionary['description']
         price = product_dictionary['price']
         count = product_dictionary['count']
+        color = product_dictionary['color']
 
         for product in cls.products_list:
             if name == product.name:
                 product.count += count
                 return product
 
-        return cls(name, description, price, count)
+        return cls(name, description, price, count, color)
 
     @property
     def price(self):
@@ -69,6 +71,10 @@ class Product:
         Метод сложения общей стоимости товаров с учетом их количества
         :return: общая сумма всех товаров
         """
-        sum_product1 = self.count * self._price
-        sum_product2 = other._price * other.count
-        return sum_product1 + sum_product2
+        if type(self) == type(other):
+            sum_product1 = self.count * self._price
+            sum_product2 = other._price * other.count
+            return sum_product1 + sum_product2
+
+        raise TypeError('Можно складывать товары только из одинаковых классов продуктов')
+

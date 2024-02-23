@@ -1,4 +1,8 @@
-class Product:
+from src.abstract_product import Abstract
+from src.repr_mixin import ReprMixin
+
+
+class Product(Abstract, ReprMixin):
     """
     Класс для представления товаров.
     """
@@ -66,7 +70,7 @@ class Product:
         """
         return f"{self.name}, {self._price} руб. Остаток: {self.count} шт."
 
-    def __add__(self, other, other2):
+    def __add__(self, other):
         """
         Метод сложения общей стоимости товаров с учетом их количества
         :return: общая сумма всех товаров

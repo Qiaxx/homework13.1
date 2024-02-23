@@ -1,6 +1,8 @@
 from src.product import Product
+from src.repr_mixin import ReprMixin
 
-class Category:
+
+class Category(ReprMixin):
     """
     Класс для представления категорий товаров.
     """
@@ -27,6 +29,8 @@ class Category:
         if isinstance(product, Product):
             self.__products.add(product)
             Category.total_unique_products += 1
+        else:
+            raise TypeError
 
     @property
     def products(self):

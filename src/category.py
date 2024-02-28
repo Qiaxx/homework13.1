@@ -26,11 +26,14 @@ class Category(ReprMixin):
         Метод добавления новых товаров
         :param product: товар
         """
-        if isinstance(product, Product):
-            self.__products.add(product)
-            Category.total_unique_products += 1
+        if product._price > 0:
+            if isinstance(product, Product):
+                self.__products.add(product)
+                Category.total_unique_products += 1
+            else:
+                raise TypeError
         else:
-            raise TypeError
+            raise ValueError('Кол-во товара не может равняться нулю')
 
     @property
     def products(self):
@@ -42,6 +45,17 @@ class Category(ReprMixin):
         for product in self.__products:
             info_list.append(f'{product.name}, {product._price} руб. Остаток: {product.count}')
         return info_list
+
+    def average_values(self):
+        try:
+            avg_count = 0
+            summ = 0
+            for item in range(Category.total_unique_products):
+                summ += self.__products
+                avg_count = summ/Category.total_unique_products
+            return avg_count
+        except ZeroDivisionError:
+            return 0
 
     def __str__(self):
         """

@@ -26,7 +26,7 @@ class Category(ReprMixin):
         Метод добавления новых товаров
         :param product: товар
         """
-        if product._price > 0:
+        if product.count > 0:
             if isinstance(product, Product):
                 self.__products.add(product)
                 Category.total_unique_products += 1
